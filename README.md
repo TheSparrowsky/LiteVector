@@ -34,8 +34,9 @@ make
 ```
 
 ## ✅ TODO
-- [ ] - Implement `emplace_back`
-- [ ] - Add `operator[]`, `begin()` and `end()` support
+- [x] - Implement `emplace_back`
+- [x] - Add `operator[]` support
+- [ ] - Add `begin()` and `end()` support
 - [ ] - Support `clear()` and `shrink_to_fit()`
 - [ ] - Unit tests and benchmarks
 
