@@ -91,9 +91,10 @@ int main()
 	vector.emplace_back("Andrzej", 32);
 	vector.emplace_back("Kiemont", 64);
 
-	LV::LiteVector<Block> liteVector(2);
+	LV::LiteVector<Block> liteVector(3);
 	liteVector.push_back(Block("Kunegunda", 21));
 	liteVector.push_back(std::move(p4));
+	liteVector.emplace_back("Chloe", 38);
 
 	PrintVector(vector);
 	PrintLiteVector(liteVector);

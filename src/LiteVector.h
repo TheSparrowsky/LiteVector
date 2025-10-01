@@ -16,6 +16,9 @@ namespace LV
 			void reserve(size_t newCapacity);
 			void push_back(const T& value);
 			void push_back(T&& value);
+
+			template<typename... Args>
+			void emplace_back(Args&&... args);
 			
 			T& operator[](size_t index) { return m_data[index]; }
 			const T& operator[](size_t index) const { return m_data[index]; }

@@ -64,4 +64,15 @@ namespace LV
 		new (m_data + m_size) T(std::move(value));
 		m_size++;
 	}
+
+	template<typename T>
+	template<typename... Args>
+	void LiteVector<T>::emplace_back(Args&&... args)
+	{
+		if(capacity_reached())
+			reserve(m_capacity == 0 ? 1 : m_capacity * 2);
+
+		new (m_data + m_size) T(std::forward<Args>(args)...);
+		m_size++;
+	}
 }
