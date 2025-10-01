@@ -56,7 +56,7 @@ namespace LV
 	}
 	
 	template<typename T>
-	void LiteVector<T>::push_back(const T&& value)
+	void LiteVector<T>::push_back(T&& value)
 	{
 		if(capacity_reached())
 			reserve(m_capacity == 0 ? 1 : m_capacity * 2);

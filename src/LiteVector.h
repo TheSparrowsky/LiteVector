@@ -10,11 +10,16 @@ namespace LV
 			LiteVector(size_t capacity);
 
 			~LiteVector();
+			
+			size_t size() const { return m_size; }
 
 			void reserve(size_t newCapacity);
 			void push_back(const T& value);
-			void push_back(const T&& value);
-		
+			void push_back(T&& value);
+			
+			T& operator[](size_t index) { return m_data[index]; }
+			const T& operator[](size_t index) const { return m_data[index]; }
+
 		private:
 			bool capacity_reached() { return m_size >= m_capacity; }
 
