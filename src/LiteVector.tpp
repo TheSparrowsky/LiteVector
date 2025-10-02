@@ -14,15 +14,30 @@ namespace LV
 	}
 
 	template<typename T>
+	LiteVector<T>::LiteVector(const LiteVector<T>& other)
+	{
+		reserve(other.size());
+
+		for(size_t i = 0; i < other.size(); i++)
+		{
+			new (m_data + i) T(other[i]);
+			m_size++;
+		}
+	}
+
+	template<typename T>
+	LiteVector<T>::LiteVector(LiteVector<T>&& other) noexcept
+		: m_data(other.m_data), m_size(other.m_size), m_capacity(other.m_capacity)
+	{
+		other.m_size = 0;
+		other.m_capacity = 0;
+		other.m_data = nullptr;
+	}
+
+	template<typename T>
 	LiteVector<T>::~LiteVector()
 	{
-		for(size_t i = 0; i < m_size; i++)
-		{
-			m_data[i].~T();
-		}
-
-		::operator delete(m_data);
-		m_data = nullptr;
+		clear();
 	}
 	
 	template<typename T>
@@ -74,5 +89,17 @@ namespace LV
 
 		new (m_data + m_size) T(std::forward<Args>(args)...);
 		m_size++;
+	}
+
+	template<typename T>
+	void LiteVector<T>::clear()
+	{
+		for(size_t i = 0; i < m_size; i++)
+			m_data[i].~T();
+
+		::operator delete(m_data);
+		m_data = nullptr;
+		m_size = 0;
+		m_capacity = 0;
 	}
 }

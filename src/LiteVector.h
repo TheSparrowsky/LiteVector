@@ -9,6 +9,8 @@ namespace LV
 		public:
 			LiteVector();
 			LiteVector(size_t capacity);
+			LiteVector(const LiteVector& other);
+			LiteVector(LiteVector&& other) noexcept;
 
 			~LiteVector();
 			
@@ -25,6 +27,7 @@ namespace LV
 			const T& operator[](size_t index) const { return m_data[index]; }
 
 		private:
+			void clear();
 			bool capacity_reached() { return m_size >= m_capacity; }
 
 		private:
