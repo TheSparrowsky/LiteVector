@@ -39,7 +39,43 @@ namespace LV
 	{
 		clear();
 	}
-	
+
+	template<typename T>
+	LiteVector<T>& LiteVector<T>::operator=(const LiteVector<T>& other)
+	{
+		if(this == &other)
+			return *this;
+
+		clear();
+
+		reserve(other.m_size);
+		m_size = other.m_size;
+
+		for(size_t i = 0; i < m_size; i++)
+			new (m_data + i) T(other[i]);
+
+		return *this;
+	}
+
+	template<typename T>
+	LiteVector<T>& LiteVector<T>::operator=(LiteVector<T>&& other) noexcept
+	{
+		if(this == &other)
+			return *this;
+
+		clear();
+
+		m_size = other.m_size;
+		m_capacity = other.m_capacity;
+		m_data = other.m_data;
+
+		other.m_size = 0;
+		other.m_capacity = 0;
+		other.m_data = nullptr;
+
+		return *this;
+	}
+
 	template<typename T>
 	void LiteVector<T>::reserve(size_t newCapacity)
 	{
@@ -97,7 +133,8 @@ namespace LV
 		for(size_t i = 0; i < m_size; i++)
 			m_data[i].~T();
 
-		::operator delete(m_data);
+		if(m_data != nullptr)
+			::operator delete(m_data);
 		m_data = nullptr;
 		m_size = 0;
 		m_capacity = 0;

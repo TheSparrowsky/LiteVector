@@ -22,7 +22,10 @@ namespace LV
 
 			template<typename... Args>
 			void emplace_back(Args&&... args);
-			
+		
+			LiteVector<T>& operator=(const LiteVector<T>& other);
+			LiteVector<T>& operator=(LiteVector<T>&& other) noexcept;
+
 			T& operator[](size_t index) { return m_data[index]; }
 			const T& operator[](size_t index) const { return m_data[index]; }
 
