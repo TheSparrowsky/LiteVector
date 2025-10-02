@@ -79,7 +79,7 @@ namespace LV
 	template<typename T>
 	void LiteVector<T>::reserve(size_t newCapacity)
 	{
-		if(newCapacity <= m_capacity)
+		if(newCapacity < m_size)
 			return;
 
 		T* tempPtr = static_cast<T*>(::operator new(sizeof(T) * newCapacity));
@@ -95,7 +95,13 @@ namespace LV
 		m_data = tempPtr;
 		m_capacity = newCapacity;
 	}
-	
+
+	template<typename T>
+	void LiteVector<T>::shrink_to_fit()
+	{
+		reserve(m_size);
+	}
+
 	template<typename T>
 	void LiteVector<T>::push_back(const T& value)
 	{

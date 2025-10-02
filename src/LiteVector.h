@@ -17,6 +17,7 @@ namespace LV
 			size_t size() const { return m_size; }
 
 			void reserve(size_t newCapacity);
+			void shrink_to_fit();
 			void push_back(const T& value);
 			void push_back(T&& value);
 
