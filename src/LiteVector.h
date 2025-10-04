@@ -9,6 +9,8 @@ namespace LV
 		public:
 			LiteVector();
 			LiteVector(size_t capacity);
+			LiteVector(std::initializer_list<T> list);
+
 			LiteVector(const LiteVector& other);
 			LiteVector(LiteVector&& other) noexcept;
 

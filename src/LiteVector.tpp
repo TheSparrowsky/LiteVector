@@ -14,6 +14,14 @@ namespace LV
 	}
 
 	template<typename T>
+	LiteVector<T>::LiteVector(std::initializer_list<T> list)
+	{
+		reserve(list.size());
+		for(const T& item : list)
+			emplace_back(item);
+	}
+
+	template<typename T>
 	LiteVector<T>::LiteVector(const LiteVector<T>& other)
 	{
 		reserve(other.size());
