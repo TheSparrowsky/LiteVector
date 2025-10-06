@@ -8,4 +8,5 @@ add_executable(LiteVector
 	src/main.cpp
 	src/LiteVector.h
 	src/LiteVector.tpp
+	src/allocators/LiteAllocator.h
 )

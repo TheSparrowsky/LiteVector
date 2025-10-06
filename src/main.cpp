@@ -61,7 +61,8 @@ static void PrintVector(const std::vector<Block>& vector)
 	std::cout << " ]" << std::endl;
 }
 
-static void PrintLiteVector(const LV::LiteVector<Block>& liteVector)
+template<typename T, typename Allocator>
+static void PrintLiteVector(const LV::LiteVector<T, Allocator>& liteVector)
 {
 	std::cout << "LV:Size: " << liteVector.size() << std::endl;
 	std::cout << "Elements: [ ";
@@ -91,7 +92,7 @@ int main()
 	vector.emplace_back("Andrzej", 32);
 	vector.emplace_back("Kiemont", 64);
 
-	LV::LiteVector<Block> test({ {"Pola", 16}, {"Aurelia", 76}});
+	LV::LiteVector<Block, std::allocator<Block>> test({ {"Pola", 16}, {"Aurelia", 76}});
 	PrintLiteVector(test);
 
 	LV::LiteVector<Block> liteVector(3);

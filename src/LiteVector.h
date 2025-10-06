@@ -1,18 +1,24 @@
 #pragma once
 #include <cstdio>
+#include "allocators/LiteAllocator.h"
 
 namespace LV
 {
-	template<typename T>
+	template<typename T, typename Allocator = LiteAllocator<T>>
 	class LiteVector
 	{
 		public:
+			using allocator_type = Allocator;
+			using traits = std::allocator_traits<allocator_type>;
+			using value_type = typename traits::value_type;
+			using pointer = typename traits::pointer;
+
 			LiteVector();
 			LiteVector(size_t capacity);
 			LiteVector(std::initializer_list<T> list);
 
-			LiteVector(const LiteVector& other);
-			LiteVector(LiteVector&& other) noexcept;
+			LiteVector(const LiteVector<T>& other);
+			LiteVector(LiteVector<T>&& other) noexcept;
 
 			~LiteVector();
 			
@@ -26,8 +32,8 @@ namespace LV
 			template<typename... Args>
 			void emplace_back(Args&&... args);
 		
-			LiteVector<T>& operator=(const LiteVector<T>& other);
-			LiteVector<T>& operator=(LiteVector<T>&& other) noexcept;
+			LiteVector<T, Allocator>& operator=(const LiteVector<T>& other);
+			LiteVector<T, Allocator>& operator=(LiteVector<T>&& other) noexcept;
 
 			T& operator[](size_t index) { return m_data[index]; }
 			const T& operator[](size_t index) const { return m_data[index]; }
@@ -40,6 +46,8 @@ namespace LV
 			T* m_data = nullptr;
 			size_t m_size = 0;
 			size_t m_capacity = 0;
+
+			allocator_type m_allocator = allocator_type();
 	};
 }
 
