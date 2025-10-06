@@ -144,8 +144,8 @@ namespace LV
 	template<typename T>
 	void LiteVector<T>::clear()
 	{
-		for(size_t i = 0; i < m_size; i++)
-			m_data[i].~T();
+		for(size_t i = m_size; i > 0; --i)
+			m_data[i - 1].~T();
 
 		if(m_data != nullptr)
 			::operator delete(m_data);
