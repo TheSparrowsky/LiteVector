@@ -103,6 +103,26 @@ int main()
 	PrintVector(vector);
 	PrintLiteVector(liteVector);
 
+	LV::LiteVector<int> numbers(16);
+	numbers.push_back(12);
+	numbers.push_back(1);
+	numbers.push_back(16);
+	numbers.push_back(54);
+	numbers.push_back(24);
+	numbers.push_back(36);
+	numbers.push_back(72);
+
+	std::cout << "\nBefore:\n" << std::endl;
+	for(auto it = numbers.begin(); it != numbers.end(); ++it)
+		std::cout << *it << std::endl;
+
+	std::sort(numbers.begin(), numbers.end());
+	
+	std::cout << "\nAfter:\n" << std::endl;
+	for(auto it = numbers.begin(); it != numbers.end(); ++it)
+		std::cout << *it << std::endl;
+
+
 	std::cout << "\n\nTotal allocations: "<< s_AllocatedCount << std::endl;
 	std::cout << "Total copies: " << s_CopiesCount << std::endl;
 	std::cout << "Total moves: " << s_MovesCount << std::endl;

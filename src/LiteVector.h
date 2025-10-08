@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdio>
 #include "allocators/LiteAllocator.h"
+#include "iterators/LiteIterator.h"
 
 namespace LV
 {
@@ -13,6 +14,9 @@ namespace LV
 			using value_type = typename traits::value_type;
 			using pointer = typename traits::pointer;
 
+			using iterator = LiteIterator<T>;
+			using const_iterator = LiteIterator<const T>;
+
 			LiteVector();
 			LiteVector(size_t capacity);
 			LiteVector(std::initializer_list<T> list);
@@ -22,6 +26,16 @@ namespace LV
 
 			~LiteVector();
 			
+			iterator begin() { return iterator(m_data); }
+			iterator end() { return iterator(m_data + m_size); }
+
+			const_iterator begin() const { return const_iterator(m_data); }
+			const_iterator end() const { return const_iterator(m_data + m_size); }
+
+			const_iterator cbegin() const { return const_iterator(m_data); }
+			const_iterator cend() const { return const_iterator(m_data + m_size); }
+
+
 			size_t size() const { return m_size; }
 
 			void reserve(size_t newCapacity);

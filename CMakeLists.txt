@@ -9,4 +9,5 @@ add_executable(LiteVector
 	src/LiteVector.h
 	src/LiteVector.tpp
 	src/allocators/LiteAllocator.h
+	src/iterators/LiteIterator.h
 )
