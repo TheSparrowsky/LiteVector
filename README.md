@@ -36,8 +36,8 @@ make
 ## ✅ TODO
 - [x] - Implement `emplace_back`
 - [x] - Add `operator[]` support
-- [ ] - Add `begin()` and `end()` support
-- [ ] - Support `clear()` and `shrink_to_fit()`
+- [x] - Add `begin()` and `end()` support
+- [x] - Support `clear()` and `shrink_to_fit()`
 - [ ] - Unit tests and benchmarks
 
 # ⚠️  Disclaimer
